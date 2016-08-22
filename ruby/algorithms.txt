@@ -1,0 +1,25 @@
+Teaching your robot to use an elevator.
+
+1. verify what room you want to go to.
+2. verify what floor the room is on.
+3. approach the elevator
+4. check what floor you are currently on
+5. press the up button if you need to go up, down button if you need to go down
+6. go to room if you are on the correct floor
+7. enter the elevator
+8. select the correct floor for the room
+9. wait for elevator to take you to the selected floor
+10. exit the elevator -> #6.
+
+
+
+Getting a drink of water.
+
+1. approach the kitchen
+2. open up the drinking glass cupboard
+3. select a drinking glass
+4. verify it is clean
+5. go to kitchen sink with glass
+6. fill glass to desired amount of water
+7. drink water
+8. leave glass in sink
