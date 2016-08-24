@@ -1,3 +1,6 @@
+# 4.4 Solo Challenge: Control Flow Practice
+# Interviewing with the Vampire
+
 current_year = 2016
 allergies = nil
 
@@ -42,25 +45,25 @@ while number_of_emplyees > 0
 	until allergies == "done"
 		allergies = gets.chomp
 		if allergies == "sunshine"
-			return puts "Probably a vampire"
+			break puts "Probably a vampire"
 		end
 	end
 
 
 
-
-	if (name == "Drake Cula" || name == "Tu Fang")
-		puts "Definitely a vampire"
-	elsif right_age && (likes_garlic || wants_insurance)
-		puts "Probably not a vampire"
-	elsif !(right_age) && (likes_garlic || wants_insurance)
-		puts "Probably a vampire"
-	elsif !(right_age) && !(likes_garlic) && !(wants_insurance)
-		puts "Almost certainly a vampire"
-	else
-		puts "Results inconclusive"
+	if allergies != "sunshine"
+		if (name == "Drake Cula" || name == "Tu Fang")
+			puts "Definitely a vampire"
+		elsif right_age && (likes_garlic || wants_insurance)
+			puts "Probably not a vampire"
+		elsif !(right_age) && (likes_garlic || wants_insurance)
+			puts "Probably a vampire"
+		elsif !(right_age) && !(likes_garlic) && !(wants_insurance)
+			puts "Almost certainly a vampire"
+		else
+			puts "Results inconclusive"
+		end
 	end
-
 
 	number_of_emplyees -= 1
 	puts "#{number_of_emplyees} left to go!"
