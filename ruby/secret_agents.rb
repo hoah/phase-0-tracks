@@ -47,12 +47,28 @@ end
 
 
 
-encrypt("abc")
-encrypt("zed")
-encrypt("z    z")
-decrypt("bcd")
-decrypt("afe")
-decrypt("a   a")
+#encrypt("abc")
+#encrypt("zed")
+#encrypt("z    z")
+#decrypt("bcd")
+#decrypt("afe")
+#decrypt("a   a")
 
 # this demonstrates the output of one method can be the input of another
-decrypt(encrypt("swordfish"))
+#decrypt(encrypt("swordfish"))
+
+# Asks a secret agent (the user) whether they would like to decrypt or encrypt a password
+puts "Would you like to decrypt or encrypt a password?"
+agent_choice = gets.chomp
+	
+
+# Asks them for the password
+puts "Please enter a password"
+password = gets.chomp
+
+# Conducts the requested operation, prints the result to the screen, and exits
+if agent_choice == "decrypt"
+	decrypt(password)
+else
+	encrypt(password)
+end
