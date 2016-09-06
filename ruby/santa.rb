@@ -1,13 +1,15 @@
 class Santa
 
+  attr_reader :ethnicity
+  attr_accessor :age, :gender
+
   def initialize(gender, ethnicity)
     puts "Initializing Santa instance..."
     @gender = gender
     @ethnicity = ethnicity
+    @reindeer_ranking = ["Rudolph", "Dasher", "Dancer", "Prancer", "Vixen", "Comet", "Cupid", "Donner", "Blitzen"]
+    @age = 0
   end
-
-  @reindeer_ranking = ["Rudolph", "Dasher", "Dancer", "Prancer", "Vixen", "Comet", "Cupid", "Donner", "Blitzen"]
-  @age = 0
 
   def speak
     puts "Ho, ho, ho! Haaaappy holidays!"
@@ -17,34 +19,19 @@ class Santa
     puts "That was a good #{cookie_type}!"
   end
 
-  def about
-    puts "This Santa is #{@gender} and #{@ethnicity}"
-  end
-
   def celebrate_birthday
     @age += 1
   end
 
   def get_mad_at(reindeer_name)
-    @reindeer_ranking = @reindeer_ranking.delete(reindeer_name).push(reindeer_name)
+    @reindeer_ranking.delete(reindeer_name)      #
+    @reindeer_ranking.push(reindeer_name)        # move reindeer_name to end of array
     puts "New reindeer ranking is #{@reindeer_ranking}"
   end
 
-  # getter methods
-  def gender
-    @gender
-  end
-
-  def ethnicity
-    @ethnicity
-  end
-
-  # setter methods
-  def gender=(new_gender)
-    @gender = new_gender
-  end
-
 end
+
+# DRIVER CODE ############################
 
 # billy_bob = Santa.new
 
@@ -57,10 +44,14 @@ example_genders = ["agender", "female", "bigender", "male", "female", "gender fl
 example_ethnicities = ["black", "Latino", "white", "Japanese-African", "prefer not to say", "Mystical Creature (unicorn)", "N/A"]
 example_genders.length.times do |i|
   santas << Santa.new(example_genders[i], example_ethnicities[i])
+  santas[i].age = rand(140)             # randomize Santa's age
 end
 
 santas.each do |person|
-  puts "This Santa is #{person.gender} and #{person.ethnicity}"
+  puts "This Santa is #{person.gender} and #{person.ethnicity} and #{person.age} years old"
 end
 
-# santas[0].get_mad_at("Rudolph")
+
+# test re-ordering reindeer ranking
+santas[0].get_mad_at("Rudolph")
+santas[0].celebrate_birthday
