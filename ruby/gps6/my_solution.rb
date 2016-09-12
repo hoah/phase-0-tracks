@@ -90,3 +90,21 @@ end
 
 #=======================================================================
 # Reflection Section
+
+=begin
+  
+What are the differences between the two different hash syntaxes shown in the state_data file?
+  The state names are given as strings and the population info are given as symbols.
+
+What does require_relative do? How is it different from require?
+  require_relative is telling the file to refer to another file for input.
+the difference is that require is referring to needed ruby libraries or gems.
+
+What are some ways to iterate through a hash?
+.each, .map
+
+When refactoring virus_effects, what stood out to you about the variables, if anything?
+  The variables where not as DRY as possible.
+
+What concept did you most solidify in this challenge?
+  iterating of a hash and require_relative
