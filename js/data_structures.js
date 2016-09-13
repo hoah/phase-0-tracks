@@ -16,3 +16,23 @@ for(var i = 0; i < names.length; i++) {
 }
 
 console.log(horse);
+
+function Car(types, color, use){
+  this.types = types;
+  this.color = color;
+  this.use = use;
+
+  this.sound = function() { console.log("Vroom, Vroom"); };
+}
+
+var newCar = new Car("Honda", "White", "personal");
+
+console.log(newCar);
+
+newCar.sound();
+
+var anotherCar = new Car("Subaru", "Red", "fun");
+
+console.log(anotherCar);
+
+anotherCar.sound();
