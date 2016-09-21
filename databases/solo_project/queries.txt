@@ -1,0 +1,77 @@
+SELECT * FROM employee;
+
+1|Emilio|Morales|20040615|1
+2|Ronald|McDonald|19850131|2
+3|Billy|Bob|19900401|2
+4|Alice|Cooper|19950505|2
+5|Clint|Eastwood|20000308|3
+6|Daniel|Ruden|20080606|4
+7|Marty|Mcfly|20151021|5
+8|Doc|Marten|19991231|5
+9|Roger|Moore|19930506|4
+
+UPDATE employee SET city_id=2 WHERE last_name="Moore";
+
+9|Roger|Moore|19930506|2
+
+
+SELECT * FROM employee, city WHERE employee.city_id = city.id;
+
+1|Emilio|Morales|20040615|1|1|Austin
+2|Ronald|McDonald|19850131|2|2|Chicago
+3|Billy|Bob|19900401|2|2|Chicago
+4|Alice|Cooper|19950505|2|2|Chicago
+5|Clint|Eastwood|20000308|3|3|Los Angeles
+6|Daniel|Ruden|20080606|4|4|Houston
+7|Marty|Mcfly|20151021|5|5|San Francisco
+8|Doc|Marten|19991231|5|5|San Francisco
+9|Roger|Moore|19930506|2|2|Chicago
+
+
+SELECT employee.last_name, city.name FROM employee JOIN city ON employee.city_id = city.id;
+
+Morales|Austin
+McDonald|Chicago
+Bob|Chicago
+Cooper|Chicago
+Eastwood|Los Angeles
+Ruden|Houston
+Mcfly|San Francisco
+Marten|San Francisco
+Moore|Chicago
+
+
+DELETE FROM employee WHERE last_name="McDonald";
+
+1|Emilio|Morales|20040615|1|1|Austin
+3|Billy|Bob|19900401|2|2|Chicago
+4|Alice|Cooper|19950505|2|2|Chicago
+5|Clint|Eastwood|20000308|3|3|Los Angeles
+6|Daniel|Ruden|20080606|4|4|Houston
+7|Marty|Mcfly|20151021|5|5|San Francisco
+8|Doc|Marten|19991231|5|5|San Francisco
+9|Roger|Moore|19930506|2|2|Chicago
+
+
+SELECT first_name, last_name, hire_date FROM employee INNER JOIN city ON employee.city_id = city.id;
+
+Emilio|Morales|20040615
+Billy|Bob|19900401
+Alice|Cooper|19950505
+Clint|Eastwood|20000308
+Daniel|Ruden|20080606
+Marty|Mcfly|20151021
+Doc|Marten|19991231
+Roger|Moore|19930506
+
+
+SELECT first_name, last_name, hire_date FROM employee LEFT JOIN city ON employee.city_id = city.id;
+
+Emilio|Morales|20040615
+Billy|Bob|19900401
+Alice|Cooper|19950505
+Clint|Eastwood|20000308
+Daniel|Ruden|20080606
+Marty|Mcfly|20151021
+Doc|Marten|19991231
+Roger|Moore|19930506
