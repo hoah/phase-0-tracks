@@ -1,0 +1,28 @@
+8.4 pair with Hoah & SchmuhlFace
+
+table 1 = businesses
+table 2 = users
+table 3 = reviews
+
+- You've joined two tables before. How do you join three?
+
+sqlite> SELECT businesses.name, reviews.comment from businesses join users on businesses.id = users.id join reviews on users.id = reviews.id;
+
+Grundy Hollow Wedding Chapel|Holy guacamole
+Amir's Towing|4 stars out of 5
+The BEagle Nightclub|worms in my salad!
+
+
+- There are some repetitive columns if we choose to view all fields. Choose instead to just view the user's names, the business name, the star rating, and the comment.
+
+sqlite> SELECT users.firstname, businesses.name, reviews.stars, reviews.comment FROM businesses JOIN users ON businesses.id = users.id JOIN reviews ON users.id = reviews.id;
+
+Bradford|Grundy Hollow Wedding Chapel|5|Holy guacamole
+Mandy|Amir's Towing|4|4 stars out of 5
+Angela|The BEagle Nightclub|1|worms in my salad!
+
+- How do you view the data of all three tables for just one particular business? 
+
+SELECT users.firstname, businesses.name, reviews.stars, reviews.comment FROM businesses JOIN users ON businesses.id = users.id JOIN reviews ON users.id = reviews.id WHERE businesses.name="Grundy Hollow Wedding Chapel";
+
+Bradford|Grundy Hollow Wedding Chapel|5|Holy guacamole
