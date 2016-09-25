@@ -23,11 +23,31 @@ db.execute(create_table_cmd)
 
 
 def add_beer_tracker(db, beer_name, brewed_in, served_from, star_rating, last_drank)
-  db.execute("INSERT INTO beer_tracker (beer_name, brewed_in, served_from, star_rating, last_drank)
-    VALUES (?, ?, ?, ?, ?)",
-    [beer_name, brewed_in, served_from, star_rating, last_drank])
+  db.execute( <<-SQL 
+    INSERT INTO beer_tracker (beer_name, brewed_in, served_from, star_rating, last_drank)
+    VALUES (?, ?, ?, ?, ?),
+    [beer_name, brewed_in, served_from, star_rating, last_drank];
+    SQL
+    )
 end
 
+def print_data(db)
+  db.execute( <<-SQL
+    SELECT * FROM beer_tracker;
+    SQL
+    )
+end
+
+def delete(db)
+  puts "Please enter the id number of the beer you want to delete."
+  id = gets.chomp.to_i
+
+  db.execute( <<-SQL 
+    DELETE FROM beer_tracker
+    WHERE id="#{id}";
+    SQL
+    )
+end
 
 def add(db)
   puts "What is the name of the beer"
@@ -49,16 +69,17 @@ def add(db)
 end
 
 def update(db)
+  puts "Here is what you have drunk so far."
+  print_data(db)
+
+  puts "Please enter the id number for the beer you want to update."
+  db.execute()
 
 end
 
-def delete(db)
 
-end
 
-def print(db)
 
-end
 
 # test driver code
 
@@ -86,10 +107,13 @@ until answer == "done"
     add(db)
 
   elsif answer == "update"
+    update(db)
 
   elsif answer == "delete"
+    delete(db)
 
   elsif answer == "print"
+    print_data
 
   end
 
