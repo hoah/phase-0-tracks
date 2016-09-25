@@ -22,23 +22,30 @@ SQL
 db.execute(create_table_cmd)
 
 
-def add_beer_tracker(db, beer_name, brewed_in, served_from, star_rating, last_drank)
-  db.execute( <<-SQL 
-    INSERT INTO beer_tracker (beer_name, brewed_in, served_from, star_rating, last_drank)
-    VALUES (?, ?, ?, ?, ?),
-    [beer_name, brewed_in, served_from, star_rating, last_drank];
-    SQL
+def add_beer_tracker(db, info_array)
+
+  db.execute(
+    "INSERT INTO beer_tracker (beer_name, brewed_in, served_from, star_rating, last_drank)
+    VALUES (?, ?, ?, ?, ?)",
+    ["#{info_array[0]}", "#{info_array[1]}", "#{info_array[2]}",
+    "#{info_array[3]}", "#{info_array[4]}"]
     )
 end
 
 def print_data(db)
-  db.execute( <<-SQL
-    SELECT * FROM beer_tracker;
+  print_db = db.execute( <<-SQL
+    SELECT * FROM beer_tracker
     SQL
-    )
+  )
+
+  print_db.each_index do |i|
+    p print_db[i]
+  end
 end
 
 def delete(db)
+  print_data(db)
+
   puts "Please enter the id number of the beer you want to delete."
   id = gets.chomp.to_i
 
@@ -49,7 +56,9 @@ def delete(db)
     )
 end
 
-def add(db)
+def get_info()
+  info_array = []
+
   puts "What is the name of the beer"
   beer_name = gets.chomp
 
@@ -65,7 +74,11 @@ def add(db)
   puts "When was the last time your drank this beer? 'YYYY-MM-DD'"
   last_drank = gets.chomp
 
-  add_beer_tracker(db, beer_name, brewed_in, served_from, star_rating, last_drank)
+  info_array = [beer_name, brewed_in, served_from, star_rating, last_drank]
+end
+
+def add(db)
+  add_beer_tracker(db, get_info())
 end
 
 def update(db)
@@ -73,8 +86,20 @@ def update(db)
   print_data(db)
 
   puts "Please enter the id number for the beer you want to update."
-  db.execute()
+  id = gets.chomp.to_i
 
+  info_array = get_info()
+
+  db.execute( <<-SQL 
+    UPDATE beer_tracker
+    SET  beer_name="#{info_array[0]}",
+         brewed_in="#{info_array[1]}",
+         served_from="#{info_array[2]}",
+         star_rating="#{info_array[3]}",
+         last_drank="#{info_array[4]}"
+    WHERE id="#{id}";
+    SQL
+    )
 end
 
 
@@ -90,13 +115,14 @@ test_array = [
 ]
 
 test_array.each_index do |i|
-  add_beer_tracker(db, test_array[i][0], test_array[i][1], test_array[i][2], test_array[i][3], test_array[i][4])
+  add_beer_tracker(db, test_array[i])
 end
 
 
 # driver code
 
 # ask user if they want to add to their tracker or print out the database
+answer = nil
 
 until answer == "done"
   puts "What would you like to do? (add, update, delete, print, or done)"
@@ -113,7 +139,7 @@ until answer == "done"
     delete(db)
 
   elsif answer == "print"
-    print_data
+    print_data(db)
 
   end
 
